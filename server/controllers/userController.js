@@ -61,3 +61,39 @@ exports.find = (req, res) => {
     );
   });
 };
+
+//Add form
+exports.form = (req, res) => {
+  res.render("add-user");
+};
+
+// Add  new user
+exports.create = (req, res) => {
+  const { first_name, last_name, email, comments } = req.body;
+  //connect to db
+  pool.getConnection((err, connection) => {
+    if (err) throw err;
+    console.log(`connection as ID ${connection.threadId}`);
+
+    //let searchTerm = req.body.search;
+
+    //use the connection
+    connection.query(
+      "INSERT INTO user SET first_name = ?, last_name = ?, email = ?, comments = ?",
+      [first_name, last_name, email, comments],
+      (err, rows) => {
+        //When done rease it
+        connection.release();
+
+        if (!err) {
+          res.render("add-user");
+        } else {
+          console.log(err);
+        }
+        console.log("The data from the user table: \n", rows);
+      }
+    );
+  });
+
+  res.render("add-user", { alert: "User added successfully" });
+};
