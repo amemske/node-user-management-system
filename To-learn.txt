@@ -1,0 +1,9 @@
+1. body parser
+
+//when in app, use this route
+
+app.get("", (req, res) => {
+  res.render("home");
+});
+
+2. SQL generators
