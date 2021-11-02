@@ -13,9 +13,25 @@
 {{/if}}
 
 
+<!-- userAlert is an object created in the userController -->
+
+{{#if userAlert}}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{userAlert}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">X</span>
+  </button>
+</div>
+{{/if}}
 
 
-<form class="row" method="POST" action="/adduser" >
+<!-- each rows gets the data from the db and is passed to the forms -->
+{{#each rows}}
+<form class="row" method="POST" action="/edituser/{{this.id}}" >
+
+
 <!-- handlebars partial -->
-  {{> submit-form }}
+   {{> submit-form }}
+
 </form>
+{{/each}}

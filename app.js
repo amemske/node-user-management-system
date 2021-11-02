@@ -39,7 +39,7 @@ pool.getConnection((err, connection) => {
 });
 
 //Router
-const routes = require("./server/routes/user");
+const routes = require("./server/routes/userRoutes");
 app.use("/", routes);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
